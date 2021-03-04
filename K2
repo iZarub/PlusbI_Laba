@@ -1,0 +1,110 @@
+#include<iostream>
+#include<vector>
+#include<cmath>
+#include<string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::vector;
+using std::getline;
+
+struct stack {
+	int value;
+	stack* next;
+	int s;
+};
+
+void add_top(stack** top, int value) {
+						
+	if (*top == NULL) {
+		*top = (stack*)malloc(sizeof(stack));
+		(*top)->value = value;
+		(*top)->next = NULL;
+	}
+	else {
+		stack* a;
+		a = (stack*)malloc(sizeof(stack));
+		a->value = value;
+		a->next = *top;
+		*top = a;
+	
+	}
+}
+
+
+
+void pop_top(stack** top) {
+	stack* a = *top;
+	*top = a->next;
+	free(a);
+	
+}
+
+
+
+void print(stack* top) {
+	stack* a = top;
+	
+	while (a != NULL) {
+		cout << a->value << " ";
+		a = a->next;
+	}
+}
+
+int main() {
+	std::string input;
+	getline(cin, input);
+	cout << input;
+	
+	std::string element;
+
+	stack* top;
+	top = NULL;
+	int i = 0;
+	int a;
+
+
+	while (i <= input.size()) {
+		if ((input[i] <= '9') and (input[i] >= '0')) {
+			while (input[i] != ' ') {
+				element += input[i];
+				++i;
+			}
+			a = std::stoi(element);
+			element = " ";
+			add_top(&top, a);
+		}
+
+		if ((input[i] == '-') and ((input[i + 1] <= '9') and (input[i + 1] >= '0'))){
+			while (input[i] != ' ') {
+				element += input[i];
+				++i;
+			}
+			a = std::stoi(element);
+			element = " ";
+			add_top(&top, -a);
+		}
+		
+		if (input[i] == '*') {
+			stack* q = top;
+			pop_top(&top);
+			stack* p = top;
+			pop_top(&top);
+			
+			add_top(&top, (*p).value * (*q).value);
+		
+		}
+
+	
+	}
+	
+	print(top);
+		
+	
+	
+	
+
+
+	return 0;
+}
