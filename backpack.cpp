@@ -10,12 +10,12 @@ using std::string;
 
 
 
-class Item {
+struct Item {
 
     int weight;
     int value;
 
-public:
+
 
     Item(int w, int v) {
         weight = w;
@@ -23,7 +23,7 @@ public:
     }
 
     int get_weight() {
-        return weigth;
+        return weight;
     }
 
     int get_value() {
@@ -36,12 +36,10 @@ public:
 
 
 
-class ItemArray() {
+struct ItemArray {
     vector<Item> contain;
 
-public:
-
-    ItemArray(vector<Items> arr) {
+    ItemArray(vector<Item> arr) {
         contain = arr;
     }
 };
@@ -50,12 +48,12 @@ public:
 
 
 
-class BackPack {
+struct BackPack {
 
     int bp_weight;
     vector<Item> filling;
 
-public:
+
 
     BackPack(int w) {
         bp_weight = w;   
